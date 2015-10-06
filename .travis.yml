@@ -1,6 +1,8 @@
 language: scala
 os:
 - linux
+before_script:
+- sh "$TRAVIS_BUILD_DIR/.travis.credentials.sh"
 script:
 - sbt clean dist
 scala:
@@ -16,6 +18,4 @@ cache:
   - "$HOME/.sbt"
   - "$HOME/.ivy2"
 after_success:
-  - >
-    sh "$TRAVIS_BUILD_DIR/.travis.credentials.sh" &&
-    sbt 'set version := version.value + "." + System.getenv("TRAVIS_BUILD_NUMBER")' universal:publish
+- sbt 'set version := version.value + "." + System.getenv("TRAVIS_BUILD_NUMBER")' universal:publish
