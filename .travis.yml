@@ -17,5 +17,4 @@ cache:
   - "$HOME/.ivy2"
 after_success:
   - >
-    sh "$TRAVIS_BUILD_DIR/.travis.credentials.sh" &&
     sbt 'set version := version.value + "." + System.getenv("TRAVIS_BUILD_NUMBER")' universal:publish
