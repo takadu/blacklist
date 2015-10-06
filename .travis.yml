@@ -2,7 +2,7 @@ language: scala
 os:
   - linux
 script:
-  - sbt clean dist
+  - sbt clean dist universal:publish
 scala:
   - 2.11.7
 jdk:
