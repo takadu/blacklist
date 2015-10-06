@@ -1,17 +1,21 @@
 language: scala
 os:
-  - linux
+- linux
 script:
-  - sbt clean dist universal:publish
+- sbt clean dist
 scala:
-  - 2.11.7
+- 2.11.7
 jdk:
-  - oraclejdk8
+- oraclejdk8
 notifications:
   email:
-    - adi.baron@takadu.com
+  - adi.baron@takadu.com
 sudo: false
-cache: 
- directories:
- - $HOME/.sbt
- - $HOME/.ivy2
+cache:
+  directories:
+  - "$HOME/.sbt"
+  - "$HOME/.ivy2"
+after_success:
+  - >
+    sh "$TRAVIS_BUILD_DIR/.travis.credentials.sh" &&
+    sbt 'set version := version.value + "." + System.getenv("TRAVIS_BUILD_NUMBER")' universal:publish
