@@ -1,0 +1,17 @@
+language: scala
+os:
+  - linux
+script:
+  - sbt clean dist
+scala:
+  - 2.11.7
+jdk:
+  - oraclejdk8
+notifications:
+  email:
+    - adi.baron@takadu.com
+sudo: false
+cache: 
+ directories:
+ - $HOME/.sbt
+ - $HOME/.ivy2
